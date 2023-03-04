@@ -9,3 +9,18 @@
     color:#fbc634;
     margin-right: 5px;
 }
+::-webkit-scrollbar {
+    width: 5px;
+}
+.cart-product:hover {
+    transform: translateY(-5px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.name-product{
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+}

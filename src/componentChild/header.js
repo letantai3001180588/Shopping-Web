@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { HandleAllContext } from "../handleAllContext";
 
-function Header({cartLenght}) {
+function Header() {
+    const context=useContext(HandleAllContext)
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -11,6 +14,9 @@ function Header({cartLenght}) {
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
+                
+                
+
                 <div className="collapse navbar-collapse me-5" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
                         <div className="navbar-nav me-5">
@@ -30,13 +36,29 @@ function Header({cartLenght}) {
                                 <i className="bi bi-cart4 me-1"></i>
                                 Cart
                                 <span className="position-absolute top-2 start-40 translate-middle badge rounded-pill bg-danger ms-3" style={{fontSize:10+'px'}}>
-                                    {cartLenght===0?'':cartLenght}
+                                    {context.cart.length===0?'':context.cart.length}
                                 </span>
                             </a>
                         </div>
-                        <button className="btn btn-secondary">
+                        {context.showAcount
+                        ?<div className="btn-group">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                                <i className="bi bi-person-circle me-3"></i>
+                                {context.acount}
+                            </button>
+                            <ul className="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <li><a className="dropdown-item" href="#">Menu item</a></li>
+                            <li><a className="dropdown-item" href="#">Menu item</a></li>
+                            <li><hr className="dropdown-divider me-2 ms-2"/></li>
+                            <li><a className="dropdown-item" href="#">Log out</a></li>
+                            </ul>
+                        </div>
+                        :<button className="btn btn-secondary">
                             <Link style={{color:'white',textDecoration:'none'}} to='/login'>Login</Link>
                         </button>
+                        }
+                        
+
                     </div>
                 </div>
             </nav>

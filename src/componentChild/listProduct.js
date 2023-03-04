@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+/* eslint-disable jsx-a11y/anchor-is-valid */
 function ListProduct({listProduct,handleAddToCart}) {
     return (
         <>
@@ -8,31 +7,35 @@ function ListProduct({listProduct,handleAddToCart}) {
                     {listProduct.map((data,i) => {
                     return(
                         <div className="col" key={i}>
-                            <div className="card h-100">
-                                <img src={data.img} className="card-img-top" style={{minHeight:250+'px'}} alt="..."/>
+                            <div className="card h-100 cart-product">
+                                <img src={data.img} className="card-img-top mt-1" style={{height:250}} alt="..."/>
                                 <div className="card-body">
-                                    <h5 className="card-title" style={{fontSize:16+'px'}}>
-                                        {data.nameShoe}
+                                    <h5 className="card-title name-product" style={{height:40,fontSize:16+'px'}}>
+                                        {data.name}
                                     </h5>
-                                    <div className="mt-1 d-flex justify-content-between align-items-center">
-                                        <div className="small-ratings">
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <div className="mt-1 d-flex justify-content-between align-items-center">
+                                                <div className="small-ratings">
+                                                    <i className="bi bi-star-fill"></i>
+                                                    <i className="bi bi-star-fill"></i>
+                                                    <i className="bi bi-star-fill"></i>
+                                                    <i className="bi bi-star-fill"></i>
+                                                    <i className="bi bi-star-fill"></i>
+                                                </div>
+                                            </div>
+                                            <p className="card-text" style={{fontSize:19,fontWeight:500}}>${data.price}</p>
+                                        </div>
+                                        <div className="col-3">
+                                            <button className="btn btn-secondary mt-2" type="button"  style={{borderRadius:50+'%'}} onClick={()=>handleAddToCart(data)}>
+                                                <i className="bi bi-cart-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <p className="card-text fw-bold">${data.price}</p>
-                                </div>
-                                <div className="card-footer">
-                                    <small className="text-muted d-grid">
-                                        <button type="button" className="btn btn-secondary" onClick={()=>handleAddToCart(data)}>
-                                            Add to card
-                                        </button>
-                                    </small>
                                 </div>
                             </div>
+
+
                         </div>
                     )})}
 
@@ -42,17 +45,21 @@ function ListProduct({listProduct,handleAddToCart}) {
             
             <nav aria-label="..." className="d-flex justify-content-center">
                 <ul className="pagination">
-                <li className="page-item disabled">
-                    <span className="page-link">Previous</span>
-                </li>
-                <li className="page-item"><a className="page-link">1</a></li>
-                <li className="page-item active" aria-current="page">
-                    <span className="page-link">2</span>
-                </li>
-                <li className="page-item"><a className="page-link">3</a></li>
-                <li className="page-item">
-                    <a className="page-link">Next</a>
-                </li>
+                    <li className="page-item disabled">
+                        <span className="page-link">Previous</span>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">1</a>
+                    </li>
+                    <li className="page-item active" aria-current="page">
+                        <span className="page-link">2</span>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">3</a>
+                    </li>
+                    <li className="page-item">
+                        <a className="page-link">Next</a>
+                    </li>
                 </ul>
             </nav>
         </>

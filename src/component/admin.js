@@ -7,7 +7,6 @@ import { HandleAllContext } from "../handleAllContext";
 
 function Admin() {
     const context=useContext(HandleAllContext)             
-    console.log(context.detailBill)
     return (
         <div className="App">
             <Header/>
@@ -22,7 +21,7 @@ function Admin() {
 
             <div className="container" style={{marginBottom:100+'px',maxHeight:500+'px',minHeight:500+'px',overflowY:'scroll'}}>
                 <div className="tab-content" id="nav-tabContent mt-3">
-                    <div className="tab-pane fade show active" id="nav-product" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div className="tab-pane fade show active" id="nav-product"  style={{borderRadius:8+'px'}} role="tabpanel" aria-labelledby="nav-home-tab">
                         <table className="table table-sm table-bordered table-striped">
                             <thead className=" bg-secondary text-white text-center">
                                 <tr>
@@ -49,19 +48,19 @@ function Admin() {
                                             <td>100 a pair</td>
                                             <td>50 a pair</td>
                                             <td style={{width:50}}>    
-                                                <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" onClick={()=>context.handleItemDelete(item.nameShoe,item.id,'Product')}>
+                                                <div className="text-center text-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" onClick={()=>context.handleItemDelete(item.nameShoe,item.id,'Product')}>
                                                     <i className="bi bi-trash3"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-warning" data-bs-toggle="modal" data-bs-target="#EditModal" onClick={()=>context.handleItemUpdate(item,item.id,'Product')}>
+                                                <div className="text-center text-warning" data-bs-toggle="modal" data-bs-target="#EditModal" onClick={()=>context.handleItemUpdate(item,item.id,'Product')}>
                                                     <i className="bi bi-pencil"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-success">
+                                                <div className="text-center text-success">
                                                     <i className="bi bi-eye"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                         </tr>
                                         
@@ -71,7 +70,7 @@ function Admin() {
                     </div>
 
                     <div className="tab-pane fade" id="nav-customer" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <table className="table table-sm table-bordered table-striped">
+                        <table className="table table-sm table-bordered table-striped" style={{borderRadius:8+'px'}}>
                             <thead className=" bg-secondary text-white text-center">
                                 <tr>
                                     <th>ID</th>
@@ -92,19 +91,19 @@ function Admin() {
                                             <td>{item.address}</td>
                                             <td>{item.phone}</td>
                                             <td style={{width:50}}>    
-                                                <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal"  onClick={()=>context.handleItemDelete(item.nameUser,item.id,'User')}>
+                                                <div className="text-center text-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal"  onClick={()=>context.handleItemDelete(item.nameUser,item.id)}>
                                                     <i className="bi bi-trash3"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#EditModal" onClick={()=>context.handleItemUpdate(item,item.id,'User')}>
+                                                <div className="text-center text-warning" data-bs-toggle="modal"  data-bs-target="#EditModal" onClick={()=>context.handleItemUpdate(item,item.id)}>
                                                     <i className="bi bi-pencil"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-success">
+                                                <div className="text-center text-success">
                                                 <i className="bi bi-eye"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                         </tr>
                                         
@@ -113,7 +112,7 @@ function Admin() {
                         </table>
                     </div>
                     <div className="tab-pane fade" id="nav-bill" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        <table className="table table-sm table-bordered table-striped">
+                        <table className="table table-sm table-bordered table-striped" style={{borderRadius:8+'px'}}>
                             <thead className=" bg-secondary text-white text-center">
                                 <tr>
                                     <th>ID</th>
@@ -130,32 +129,32 @@ function Admin() {
                                         <tr key={i} className='align-middle justify-content-center text-center'>
                                             <th>{item.id}</th>
                                             <td>{item.name}</td>
-                                            <td>{item.total}</td>
+                                            <td>$ {item.total}</td>
                                             <td>{item.createat}</td>
                                             <td>{item.status}</td>
                                             <td style={{width:50}}>    
-                                                <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal"  onClick={()=>context.handleItemDelete("Hoa don "+(i+1),item.id)}>
+                                                <div className="text-center text-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal"  onClick={()=>context.handleItemDelete("Hoa don "+(i+1),item.id)}>
                                                     <i className="bi bi-trash3"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-warning">
+                                                <div className="text-center text-warning">
                                                     <i className="bi bi-pencil"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#DetailModal" onClick={()=>context.setIdWatch(item.id)}>
+                                                <div className="text-center text-success" data-bs-toggle="modal" data-bs-target="#DetailModal" onClick={()=>context.setIdWatch(item.id)}>
                                                     <i className="bi bi-eye"></i>
-                                                </button>
+                                                </div>
                                             </td>
                                             <td style={{width:50}}>
-                                                <button type="button" className="btn btn-primary">
+                                                <div className="text-center text-primary">
                                                     <i className="bi bi-chat-dots"></i>
-                                                </button>
+                                                </div>
                                             </td>
-                                        </tr>
-                                        
-                                )})}
+                                        </tr>   
+                                    )
+                                })}
                             </tbody>
                         </table>
                     </div>
@@ -230,11 +229,9 @@ function Admin() {
                     <div className="modal-body">
                         {context.detailBill.map((item,i)=>(
                             item.id===context.idWatch
-                            &&<>
-                                <div key={i}>
-                                    {item.name}
-                                </div>
-                            </>
+                            &&<div key={i}>
+                                {item.name}
+                            </div>
                         ))}
                     </div>
                     <div className="modal-footer">

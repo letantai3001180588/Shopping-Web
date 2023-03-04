@@ -18,7 +18,7 @@ function Caurosel() {
                         <img src="https://lambanner.com/wp-content/uploads/2022/10/MNT-DESIGN-BANNER-GIAY-11.jpg" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
                     </div>
                     <div className="carousel-item">
-                        <img src="https://induongquang.com/data/upload/banner-quang-cao-xin.jpg" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
+                        <img src="https://media.licdn.com/dms/image/C5112AQEaaI6z3NxGLQ/article-inline_image-shrink_1000_1488/0/1520238935596?e=1683158400&v=beta&t=5vpHLw3shBZG_fw_0nRnqwvGqIdC5Um4JWoPlnUOdIk" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -32,11 +32,11 @@ function Caurosel() {
                 </div>
 
                 <div className="row" style={{marginTop:20+'px',marginBottom:20+'px'}}>
-                <div className="col-md-6">
-                    <div className="d-flex">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <div className="col-md-6">
+                        <div className="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </>
