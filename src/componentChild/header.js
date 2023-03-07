@@ -26,21 +26,32 @@ function Header() {
                                 <i className="bi bi-house me-1"></i>
                                 Home
                             </a>
-                            <a className="nav-item nav-link">
-                                <i className="bi bi-bell me-1"></i>
-                                Notification
-                            </a>
-                            <a className="nav-item nav-link">
-                                <i className="bi bi-gear me-1"></i>
-                                Setting
-                            </a>
-                            <a className="nav-item nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
-                                <i className="bi bi-cart4 me-1"></i>
-                                Cart
-                                <span className="position-absolute top-2 start-40 translate-middle badge rounded-pill bg-danger ms-3" style={{fontSize:10+'px'}}>
-                                    {context.cart.length===0?'':context.cart.length}
-                                </span>
-                            </a>
+                            {context.showAdmin
+                            ?<>
+                                <a className="nav-item nav-link" onClick={()=>context.navigate('/admin')}>
+                                    <i className="bi bi-person-fill-gear me-1"></i>
+                                    Admin
+                                </a>
+                            </>
+                            :<>
+                                <a className="nav-item nav-link">
+                                    <i className="bi bi-bell me-1"></i>
+                                    Notification
+                                </a>
+                                <a className="nav-item nav-link">
+                                    <i className="bi bi-gear me-1"></i>
+                                    Setting
+                                </a>
+                                <a className="nav-item nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" role="button">
+                                    <i className="bi bi-cart4 me-1"></i>
+                                    Cart
+                                    <span className="position-absolute top-2 start-40 translate-middle badge rounded-pill bg-danger ms-3" style={{fontSize:10+'px'}}>
+                                        {context.cart.length===0?'':context.cart.length}
+                                    </span>
+                                </a>
+                            </>
+                            
+                            }
                         </div>
                         {context.showAcount
                         ?<div className="btn-group">

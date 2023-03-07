@@ -6,8 +6,9 @@ import Header from "../componentChild/header";
 import { HandleAllContext } from "../handleAllContext";
 
 function Admin() {
-    const context=useContext(HandleAllContext)             
-    return (
+    const context=useContext(HandleAllContext)
+    if(context.showAdmin)         
+    return (   
         <div className="App">
             <Header/>
 
@@ -268,8 +269,6 @@ function Admin() {
                     </div>
                 </div>
             </div>
-
-
 
             <Footer/>
 

@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 const HandleAllContext=createContext()
 function HandleAllProvider({children}){
-    const [listProduct,setListProduct]=useState([]);
     const navigate = useNavigate();
 
     axios.defaults.withCredentials = true
@@ -33,18 +32,11 @@ function HandleAllProvider({children}){
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     
-
-    useEffect(()=>{
-        axios.get(`http://localhost:3000/product`)
-        .then(res => {
-            setListProduct(res.data)
-        })
-        .catch(error => console.log(error));
-
+    const handleLoader=()=>{
         const token=getCookie('token')
         const role=getCookie('role')
         if(token&&role==='user'){
-            axios.get(`http://localhost:3000/home`,
+            axios.get(`https://shoppingbe.onrender.com/home`,
                 { headers: {"Authorization" : token} }
             )
             .then(res=>{
@@ -52,11 +44,12 @@ function HandleAllProvider({children}){
                     setAcount(res.data.acount[0].user)
                     setIdAcount(res.data.acount[0]._id)
                     setShowAcount(true)
+                    setShowAdmin(false)
                 }
             })
         }
         if(token&&role==='admin'){
-            axios.get(`http://localhost:3000/admin`,
+            axios.get(`https://shoppingbe.onrender.com/admin`,
                 { headers: {"Authorization" : token} }
             )
             .then(res=>{
@@ -67,14 +60,26 @@ function HandleAllProvider({children}){
                 setListUsersDB(res.data.acountDB)
                 setBillDB(res.data.bill)
                 setDetailBillDB(res.data.detailBill)
+                setShowAdmin(true)
 
                 setShowAcount(true)
                 navigate('/admin')
             })
             .catch(error => console.log(error))
         }
+    }
+
+    useEffect(()=>{
+        axios.get(`https://shoppingbe.onrender.com/product`)
+        .then(res => {
+            setListProduct(res.data)
+        })
+        .catch(error => console.log(error));
+
+        handleLoader();
     },[])
 
+    const [listProduct,setListProduct]=useState([]);
     const [listUsersDB,setListUsersDB]=useState([]);
     const [listProductDB,setListProductDB]=useState([]);
     const [billDB,setBillDB]=useState([])
@@ -95,6 +100,7 @@ function HandleAllProvider({children}){
     const [user,setUser]=useState('')
     const [password,setPassword]=useState('')
     const [acount,setAcount]=useState([])
+    const [showAdmin,setShowAdmin]=useState(false)
     const [idAcount,setIdAcount]=useState('')
     const [showAcount,setShowAcount]=useState(false)
 
@@ -133,7 +139,6 @@ function HandleAllProvider({children}){
             ))
     }
 
-    // delete item in cart in product page
     const handleDeleteItem=(id)=>{
         const arr=cart.filter(item=>item.data._id!==id)
         setCart(arr)        
@@ -151,11 +156,11 @@ function HandleAllProvider({children}){
     }
     
     const handleDelete=(data,i)=>{
-        
         const token=getCookie('token')
-        axios.delete('http://localhost:3000/'+typeTable+'/delete/'+idDelete,
+        axios.delete('https://shoppingbe.onrender.com/'+typeTable+'/delete/'+idDelete,
         { headers: {"Authorization" : token} })
         .then((res)=>{
+            handleLoader();
         })
         
     }
@@ -192,14 +197,15 @@ function HandleAllProvider({children}){
 
     const handleUpdate=(value,id)=>{
         const token=getCookie('token')
-        axios.put('http://localhost:3000/'+typeTable+'/update/'+idUpdate,itemUpdate,
+        axios.put('https://shoppingbe.onrender.com/'+typeTable+'/update/'+idUpdate,itemUpdate,
         { headers: {"Authorization" : token} })
         .then((res)=>{
+            handleLoader();
         })
     }
 
     const handleLogin=()=>{
-        const URL_login=`http://localhost:3000/login`
+        const URL_login=`https://shoppingbe.onrender.com/login`
         const acount={
             user:user,
             password:password
@@ -214,19 +220,20 @@ function HandleAllProvider({children}){
                     setCookie('role',Object(res.data.role),15)
                     const token=getCookie('token')
                     if(res.data.role==='user'){
-                        axios.get(`http://localhost:3000/home`,
+                        axios.get(`https://shoppingbe.onrender.com/home`,
                             { headers: {"Authorization" : token} }
                         )
                         .then(res=>{
                             setAcount(res.data.acount[0].user)
                             setIdAcount(res.data.acount[0]._id)
                             setShowAcount(true)
+                            setShowAdmin(false)
                             navigate('/');
                         })
                         .catch(error => console.log(error))
                     }
                     else if(res.data.role==='admin'){
-                        axios.get(`http://localhost:3000/admin`,
+                        axios.get(`https://shoppingbe.onrender.com/admin`,
                             { headers: {"Authorization" : token} }
                         )
                         .then(res=>{
@@ -237,6 +244,7 @@ function HandleAllProvider({children}){
                             setListUsersDB(res.data.acountDB)
                             setBillDB(res.data.bill)
                             setDetailBillDB(res.data.detailBill)
+                            setShowAdmin(true)
 
                             setShowAcount(true)
                             navigate('/admin')
@@ -254,7 +262,7 @@ function HandleAllProvider({children}){
 
     const handleRegister=()=>{
         if(userRegister && passwordRegister && addressRegister && phoneRegister && emailRegister){
-            axios.post(`http://localhost:3000/register`,{
+            axios.post(`https://shoppingbe.onrender.com/register`,{
                 user:userRegister,
                 password:passwordRegister,
                 address:addressRegister,
@@ -263,6 +271,7 @@ function HandleAllProvider({children}){
                 role:'user'
             })
             .then(res=>{
+                handleLoader();
             })
             .catch(error => console.log(error))
         }
@@ -274,6 +283,7 @@ function HandleAllProvider({children}){
 
     const handleLogout=()=>{
         setCookie('token','',0)
+        setShowAdmin(false)
         navigate('/')
         window.location.reload()
     }
@@ -281,7 +291,7 @@ function HandleAllProvider({children}){
     const handleOrderProduct=()=>{
         const total=cart.reduce((sum,item)=>sum+item.data.price*item.amount,0)
         const token=getCookie('token')
-        axios.post('http://localhost:3000/bill/create', 
+        axios.post('https://shoppingbe.onrender.com/bill/create', 
         {id_user:idAcount,total:total},
         { headers: {"Authorization" : token} },
         )
@@ -290,13 +300,14 @@ function HandleAllProvider({children}){
             const data=cart.map(item=>{
                 return{quantity:Number(item.amount),id_product:item.data._id,id_bill:res.data._id}
             })
-            axios.post('http://localhost:3000/detailBill/create',
+            axios.post('https://shoppingbe.onrender.com/detailBill/create',
                 data,
                 { headers: {"Authorization" : token} },
             ).then((respon)=>{
                 navigate('/')
                 setCart([])
                 setShow(false)
+                handleLoader();
             })
             .catch()
         })
@@ -307,7 +318,7 @@ function HandleAllProvider({children}){
 
     const handleAddProduct=()=>{
         const token=getCookie('token')
-        axios.post('http://localhost:3000/product/create',
+        axios.post('https://shoppingbe.onrender.com/product/create',
         {
             img:imgAddProduct,name:productAddProduct,price:priceAddProduct
         },
@@ -323,7 +334,8 @@ function HandleAllProvider({children}){
 
 
     const value={
-        listProduct,cart,show,itemDelete,itemUpdate,listUsersDB,billDB,detailBillDB,listProductDB,idWatch,
+        listProduct,cart,show,itemDelete,itemUpdate,showAdmin,
+        listUsersDB,billDB,detailBillDB,listProductDB,idWatch,
         acount,showAcount,typeTable,
         imgAddProduct,productAddProduct,priceAddProduct,
         setImgAddProduct,setProductAddProduct,setPriceAddProduct,
