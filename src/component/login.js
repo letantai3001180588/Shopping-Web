@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
 import Header from "../componentChild/header";
-import { Link } from "react-router-dom";
+
 function Login() {
     const context=useContext(HandleAllContext)
     return (
@@ -20,13 +20,16 @@ function Login() {
                         <input type="password" className="form-control" id="exampleInputPassword1" name="password" onChange={e=>context.setPassword(e.target.value)} />
                     </div>
                     <div className=" form-check">
-                        <label className="form-check-label" htmlFor="exampleCheck1">Don't have an account? Join now</label>
+                        <label className="form-check-label" htmlFor="exampleCheck1">
+                            Don't have an account?
+                            <span className="text-primary" onClick={()=>context.navigate('/register')}>
+                                Join now
+                            </span>
+                        </label>
                     </div>
-                    <Link style={{color:'white',textDecoration:'none'}} to={context.acount?'/':''}>
-                        <button type="submit" className="btn btn-secondary col-12 mt-3" onClick={()=>context.handleLogin()} >
-                            Sign in
-                        </button>
-                    </Link>
+                    <button type="submit" className="btn btn-secondary col-12 mt-3" onClick={()=>context.handleLogin()} >
+                        Sign in
+                    </button>
                 </div>
             </div>
         </div>

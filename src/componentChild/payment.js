@@ -1,4 +1,9 @@
+import { HandleAllContext } from "../handleAllContext";
+import { useContext } from "react";
+
 function Payment() {
+    const context=useContext(HandleAllContext)
+
     return (
         <>
             <div className="col-lg-6">
@@ -61,7 +66,7 @@ function Payment() {
                         </div>
 
                         <div className="col-12 d-grid mb-1">
-                            <button type="button" className="btn btn-primary btn-block btn-lg">
+                            <button type="button" className="btn btn-primary btn-block btn-lg" onClick={()=>context.handleOrderProduct()}>
                                 <span>Checkout</span>
                             </button>
                         </div>

@@ -2,9 +2,11 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
     const context=useContext(HandleAllContext)
+    const navigate = useNavigate();
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -20,7 +22,7 @@ function Header() {
                 <div className="collapse navbar-collapse me-5" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
                         <div className="navbar-nav me-5">
-                            <a className="nav-item nav-link active">
+                            <a className="nav-item nav-link active" onClick={()=>navigate('/')}>
                                 <i className="bi bi-house me-1"></i>
                                 Home
                             </a>
@@ -47,15 +49,35 @@ function Header() {
                                 {context.acount}
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <li><a className="dropdown-item" href="#">Menu item</a></li>
-                            <li><a className="dropdown-item" href="#">Menu item</a></li>
+                            <li>
+                                <a className="dropdown-item">
+                                    <i className="bi bi-person-lines-fill me-2"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a className="dropdown-item">
+                                    <i className="bi bi-question-circle me-2"></i>
+                                    Help
+                                </a>
+                            </li>
                             <li><hr className="dropdown-divider me-2 ms-2"/></li>
-                            <li><a className="dropdown-item" href="#">Log out</a></li>
+                            <li>
+                                <a className="dropdown-item" href="#" onClick={()=>context.handleLogout()}>
+                                    <i className="bi bi-box-arrow-right me-2"></i>
+                                    Log out
+                                </a>
+                            </li>
                             </ul>
                         </div>
-                        :<button className="btn btn-secondary">
-                            <Link style={{color:'white',textDecoration:'none'}} to='/login'>Login</Link>
-                        </button>
+                        :<>
+                            <button className="btn btn-secondary" onClick={()=>context.navigate('/login')}>
+                                Login
+                            </button>
+                            <button className="btn btn-outline-secondary text-dark ms-1" onClick={()=>context.navigate('/register')}>
+                                Register
+                            </button>
+                        </>
                         }
                         
 

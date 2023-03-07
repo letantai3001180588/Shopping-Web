@@ -12,7 +12,7 @@ function Cart({cart,handleTotal}) {
                     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body p-1" >
-                    <div className=" mb-4" style={{borderBottomWidth:1+'px',borderBottomStyle:"solid",borderBottomColor:'#dbdbdb',height:480+'px',maxHeight:480+'px',overflowY:'scroll'}}>
+                    <div className=" mb-4 list-card" style={{borderBottomWidth:1+'px',borderBottomStyle:"solid",borderBottomColor:'#dbdbdb',height:480+'px',maxHeight:480+'px',overflowY:'scroll'}}>
                         <ListItem/>
                     </div>
 

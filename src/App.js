@@ -5,6 +5,7 @@ import Product from './component/product';
 import Login from './component/login';
 import Checkout from './component/checkout';
 import Admin from './component/admin';
+import Register from './component/register';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
             <Route path="/" exact element={<Product/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
             <Route path="/checkout" element={<Checkout/>} />
             <Route path="/admin" element={<Admin/>} />
             {/* <Route path="/about" component={About} />

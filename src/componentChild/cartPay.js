@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
 import ListItem from "./listItemInCart";
+import { useContext } from "react";
+import { HandleAllContext } from "../handleAllContext";
 
 function CartPay() {
-    const navigate=useNavigate();
+    const context=useContext(HandleAllContext)
     return (
         <>
             <div className="col-lg-6" >
                 <div className="card rounded-3">
                     <div className="card-body">
                         <div className="d-flex justify-content-between align-items-center mb-4">
-                            <h5 className="mb-0" onClick={() => navigate(-1)}>
+                            <h5 className="mb-0" onClick={() => context.navigate('/')}>
                                 <i className="bi bi-arrow-left-circle-fill me-2"></i>
                                 Back ShoeStore 
                             </h5>
@@ -25,17 +26,17 @@ function CartPay() {
                         <hr className="my-4"/>
                         <div className="d-flex justify-content-between">
                             <p className="mb-2">Subtotal</p>
-                            <p className="mb-2">$4798.00</p>
+                            <p className="mb-2">$ {context.cart.reduce((sum,item)=>sum+item.data.price*item.amount,0)}</p>
                         </div>
 
                         <div className="d-flex justify-content-between">
                             <p className="mb-2">Shipping</p>
-                            <p className="mb-2">$20.00</p>
+                            <p className="mb-2">FREE SHIP</p>
                         </div>
 
                         <div className="d-flex justify-content-between mb-4 fw-bold">
                             <p className="mb-2">Total(Incl. taxes)</p>
-                            <p className="mb-2">$4818.00</p>
+                            <p className="mb-2">$ {context.cart.reduce((sum,item)=>sum+item.data.price*item.amount,0)}</p>
                         </div>
 
                     </div>

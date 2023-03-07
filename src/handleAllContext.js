@@ -1,91 +1,84 @@
+/* eslint-disable no-const-assign */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-unused-vars */
 import { useState,createContext, useEffect } from "react";
 import axios from'axios';
-// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HandleAllContext=createContext()
 function HandleAllProvider({children}){
     const [listProduct,setListProduct]=useState([]);
+    const navigate = useNavigate();
+
+    axios.defaults.withCredentials = true
+    const getCookie=(cname)=> {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+        }
+        }
+        return "";
+    }
+    const setCookie=(cname, cvalue, exdays)=> {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    
 
     useEffect(()=>{
-        axios.get(`https://shoppingbe.onrender.com/product`)
+        axios.get(`http://localhost:3000/product`)
         .then(res => {
             setListProduct(res.data)
         })
         .catch(error => console.log(error));
-        const token=getCookie('token')
 
-        axios.get(`https://shoppingbe.onrender.com/home`,
-        { headers: {"Authorization" : token} }
-        )
-        .then(res=>{
-            setAcount(res.data.acount[0].user)
-            setShowAcount(true)
-        })
-        .catch(error => console.log(error))
+        const token=getCookie('token')
+        const role=getCookie('role')
+        if(token&&role==='user'){
+            axios.get(`http://localhost:3000/home`,
+                { headers: {"Authorization" : token} }
+            )
+            .then(res=>{
+                if(res.data.acount){
+                    setAcount(res.data.acount[0].user)
+                    setIdAcount(res.data.acount[0]._id)
+                    setShowAcount(true)
+                }
+            })
+        }
+        if(token&&role==='admin'){
+            axios.get(`http://localhost:3000/admin`,
+                { headers: {"Authorization" : token} }
+            )
+            .then(res=>{
+                setAcount(res.data.acount[0].user)
+                setIdAcount(res.data.acount[0]._id)
+
+                setListProductDB(res.data.product)
+                setListUsersDB(res.data.acountDB)
+                setBillDB(res.data.bill)
+                setDetailBillDB(res.data.detailBill)
+
+                setShowAcount(true)
+                navigate('/admin')
+            })
+            .catch(error => console.log(error))
+        }
     },[])
 
-    const [listUsers,setListUsers]=useState([
-        {
-            id:1,
-            nameUser:'Nguyễn Văn A',
-            email:'VanA@gmail.com',
-            address:'Ha Noi',
-            phone:'078 910 1112',
-        },
-        {
-            id:2,
-            nameUser:'Tran Van B',
-            email:'VanB@gmail.com',
-            address:'Da Nang',
-            phone:'078 910 1112',
-        },
-        {
-            id:3,
-            nameUser:'Le Thi C',
-            email:'ThiC@gmail.com',
-            address:'Ho chi minh',
-            phone:'078 910 1112',
-        }
-    ]);
-
-    const bill=[
-        {
-            id:1,
-            name:'Nguyễn Văn A',
-            email:'VanA@gmail.com',
-            total:'550',
-            createat:'2-2-2023',
-            status:'Pendding'
-        },
-        {
-            id:2,
-            name:'Tran Van B',
-            email:'VanA@gmail.com',
-            total:'550',
-            createat:'2-5-2023',
-            status:'Completed'
-        }
-    ]
-
-    const detailBill=[
-        {
-            id:1,
-            name:'Giày Adidas Ultra Boost 21 White Stripes Black',
-            quantity:5,
-        },
-        {
-            id:1,
-            name:'Giày adidas Superstar Primeknit Bounce',
-            quantity:2,
-        },
-        {
-            id:2,
-            name:'Giày adidas Superstar Primeknit Bounce',
-            quantity:2,
-        }
-    ]
+    const [listUsersDB,setListUsersDB]=useState([]);
+    const [listProductDB,setListProductDB]=useState([]);
+    const [billDB,setBillDB]=useState([])
+    const [detailBillDB,setDetailBillDB]=useState([])
 
     const [cart,setCart]=useState([])
     const [show,setShow]=useState(false);
@@ -97,10 +90,24 @@ function HandleAllProvider({children}){
 
     const [itemUpdate,setItemUpdate]=useState([]);
     const [idUpdate,setIdUpdate]=useState();
-
     const [idWatch,setIdWatch]=useState();
 
+    const [user,setUser]=useState('')
+    const [password,setPassword]=useState('')
+    const [acount,setAcount]=useState([])
+    const [idAcount,setIdAcount]=useState('')
+    const [showAcount,setShowAcount]=useState(false)
 
+    const [userRegister,setUserRegister]=useState('')
+    const [passwordRegister,setPasswordRegister]=useState('')
+    const [addressRegister,setAddressRegister]=useState('')
+    const [phoneRegister,setPhoneRegister]=useState('')
+    const [emailRegister,setEmailRegister]=useState('')
+
+    const [idBill,setIdBill]=useState('')
+    const [imgAddProduct,setImgAddProduct]=useState('')
+    const [productAddProduct,setProductAddProduct]=useState('')
+    const [priceAddProduct,setPriceAddProduct]=useState('')
 
     const handleAddToCart=(data)=>{
         if(cart.some(item=>item.data._id===data._id)){
@@ -144,21 +151,27 @@ function HandleAllProvider({children}){
     }
     
     const handleDelete=(data,i)=>{
-        console.log(itemDelete)
-        console.log(idDelete)
-        console.log(typeTable)
+        
+        const token=getCookie('token')
+        axios.delete('http://localhost:3000/'+typeTable+'/delete/'+idDelete,
+        { headers: {"Authorization" : token} })
+        .then((res)=>{
+        })
         
     }
+
     const handleItemUpdate=(data,i)=>{
         setItemUpdate(data)
         setIdUpdate(i)
     }
+
     const handleChangeUpdate=(e,i)=>{
         let b=Object.assign({}, itemUpdate)
         const a=Object.keys(itemUpdate)[i]
         b[a]=e.target.value
         setItemUpdate(b)
     }
+
     const handleDecrease=(id,value)=>{
         setCart(cart => 
             cart.map(item => 
@@ -167,6 +180,7 @@ function HandleAllProvider({children}){
             :item
             ))
     }
+
     const handleIncrease=(id,value)=>{
         setCart(cart => 
             cart.map(item => 
@@ -177,76 +191,152 @@ function HandleAllProvider({children}){
     }
 
     const handleUpdate=(value,id)=>{
-        console.log(itemUpdate)
-        console.log(idUpdate)
-        console.log(typeTable)
+        const token=getCookie('token')
+        axios.put('http://localhost:3000/'+typeTable+'/update/'+idUpdate,itemUpdate,
+        { headers: {"Authorization" : token} })
+        .then((res)=>{
+        })
     }
-    
-    const getCookie=(cname)=> {
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-        }
-        if (c.indexOf(name) === 0) {
-            return c.substring(name.length, c.length);
-        }
-        }
-        return "";
-    }
-
-    axios.defaults.withCredentials = true
-    const setCookie=(cname, cvalue, exdays)=> {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    
-    const [user,setUser]=useState('')
-    const [password,setPassword]=useState('')
-    const [acount,setAcount]=useState([])
-    const [showAcount,setShowAcount]=useState(false)
 
     const handleLogin=()=>{
-        const URL_login=`https://shoppingbe.onrender.com/login`
+        const URL_login=`http://localhost:3000/login`
         const acount={
             user:user,
             password:password
         }
-        axios.post(URL_login,acount)
-        .then(res => {
-            if(res.data==='Failure')
-            alert('dang nhap that bai')
-            else{
-                // console.log(res.data)
-                setCookie('token',Object(res.data.accessToken),15)
-                const token=getCookie('token')
-                axios.get(`https://shoppingbe.onrender.com/home`,
-                    { headers: {"Authorization" : token} }
-                )
-                .then(res=>{
-                    setAcount(res.data.acount[0].user)
-                    setShowAcount(true)
-                    // navigate('/');
-                })
-                .catch(error => console.log(error))
-            }
+        if(user&&password){
+            axios.post(URL_login,acount)
+            .then(res => {
+                if(res.data==='Failure')
+                alert('dang nhap that bai')
+                else{
+                    setCookie('token',Object(res.data.accessToken),15)
+                    setCookie('role',Object(res.data.role),15)
+                    const token=getCookie('token')
+                    if(res.data.role==='user'){
+                        axios.get(`http://localhost:3000/home`,
+                            { headers: {"Authorization" : token} }
+                        )
+                        .then(res=>{
+                            setAcount(res.data.acount[0].user)
+                            setIdAcount(res.data.acount[0]._id)
+                            setShowAcount(true)
+                            navigate('/');
+                        })
+                        .catch(error => console.log(error))
+                    }
+                    else if(res.data.role==='admin'){
+                        axios.get(`http://localhost:3000/admin`,
+                            { headers: {"Authorization" : token} }
+                        )
+                        .then(res=>{
+                            setAcount(res.data.acount[0].user)
+                            setIdAcount(res.data.acount[0]._id)
+
+                            setListProductDB(res.data.product)
+                            setListUsersDB(res.data.acountDB)
+                            setBillDB(res.data.bill)
+                            setDetailBillDB(res.data.detailBill)
+
+                            setShowAcount(true)
+                            navigate('/admin')
+                        })
+                        .catch(error => console.log(error))
+                    }
+                }
+            })
+            .catch(error => console.log(error));
+        }
+        else
+            alert('Can nhap day du thong tin')
+    }
+
+
+    const handleRegister=()=>{
+        if(userRegister && passwordRegister && addressRegister && phoneRegister && emailRegister){
+            axios.post(`http://localhost:3000/register`,{
+                user:userRegister,
+                password:passwordRegister,
+                address:addressRegister,
+                phone:phoneRegister,
+                email:emailRegister,
+                role:'user'
+            })
+            .then(res=>{
+            })
+            .catch(error => console.log(error))
+        }
+        else{
+            alert('Ban can nhap thong tin day du')
+        }
+        navigate('/login')
+    }
+
+    const handleLogout=()=>{
+        setCookie('token','',0)
+        navigate('/')
+        window.location.reload()
+    }
+
+    const handleOrderProduct=()=>{
+        const total=cart.reduce((sum,item)=>sum+item.data.price*item.amount,0)
+        const token=getCookie('token')
+        axios.post('http://localhost:3000/bill/create', 
+        {id_user:idAcount,total:total},
+        { headers: {"Authorization" : token} },
+        )
+        .then(res=>{
+            setIdBill(res.data._id);
+            const data=cart.map(item=>{
+                return{quantity:Number(item.amount),id_product:item.data._id,id_bill:res.data._id}
+            })
+            axios.post('http://localhost:3000/detailBill/create',
+                data,
+                { headers: {"Authorization" : token} },
+            ).then((respon)=>{
+                navigate('/')
+                setCart([])
+                setShow(false)
+            })
+            .catch()
         })
-        .catch(error => console.log(error));
+        .catch()
+        
+        alert('Chuc mung ban da dat hang thanh cong, dich vu van chuyen hang den ban trong vong 24h')
+    }
+
+    const handleAddProduct=()=>{
+        const token=getCookie('token')
+        axios.post('http://localhost:3000/product/create',
+        {
+            img:imgAddProduct,name:productAddProduct,price:priceAddProduct
+        },
+        { headers: {"Authorization" : token} }
+        ).then((res)=>{
+            setImgAddProduct('')
+            setProductAddProduct('')
+            setPriceAddProduct('')
+            alert('them san pham thanh cong')
+        })
+        .catch()
     }
 
 
     const value={
-        listProduct,cart,show,itemDelete,itemUpdate,listUsers,bill,detailBill,idWatch,acount,showAcount,
+        listProduct,cart,show,itemDelete,itemUpdate,listUsersDB,billDB,detailBillDB,listProductDB,idWatch,
+        acount,showAcount,typeTable,
+        imgAddProduct,productAddProduct,priceAddProduct,
+        setImgAddProduct,setProductAddProduct,setPriceAddProduct,
+        navigate,
+        setUserRegister,setPasswordRegister,setAddressRegister,setPhoneRegister,setEmailRegister,
         setIdWatch,setTypeTable,setUser,setPassword,
         handleAddToCart,handleChangeAmount,handleDeleteItem,handleTotal,
         handleItemDelete,handleItemUpdate,handleChangeUpdate,handleUpdate,handleDelete,
         handleIncrease,handleDecrease,
-        handleLogin
+        handleLogin,handleRegister,handleLogout,
+        handleOrderProduct,
+        handleAddProduct,
+        
     }
 
     return (

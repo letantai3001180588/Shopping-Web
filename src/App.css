@@ -12,6 +12,10 @@
 ::-webkit-scrollbar {
     width: 5px;
 }
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #7c7c7c;
+}
 .cart-product:hover {
     transform: translateY(-5px);
     transition: all 0.2s ease-in-out;
@@ -23,4 +27,19 @@
     overflow: hidden;
     text-overflow: ellipsis; 
     display: -webkit-box;
+}
+
+.list-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-card::-webkit-scrollbar-track {
+    border: 2px solid #cfcfcf;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.list-card::-webkit-scrollbar-thumb {
+    background-color: #7c7c7c;
+    border-radius: 5px;
 }
