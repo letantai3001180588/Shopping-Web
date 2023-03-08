@@ -1,9 +1,12 @@
 // import { useState } from "react";
 import { Link } from "react-router-dom";
 import ListItem from "./listItemInCart";
+import { HandleAllContext } from "../handleAllContext";
+import { useContext } from "react";
 
 function Cart({cart,handleTotal}) {
     
+    const context=useContext(HandleAllContext)
     return (
         <>
             <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style={{width:450+'px'}}>
@@ -22,12 +25,10 @@ function Cart({cart,handleTotal}) {
                     </div>
                     
                     <div className="col-12 d-grid mt-2 fw-bold">
-                        <button className="btn btn-secondary m-2">
-                            <Link style={{color:'white',textDecoration:'none'}} to={cart.length?'/checkout':''}>
-                                <h4>
-                                    Check out
-                                </h4>
-                            </Link> 
+                        <button className="btn btn-secondary m-2" onClick={()=>context.handleCheckOut()}>                            
+                            <h4>
+                                Check out
+                            </h4>
                         </button>
                         <button className="btn btn-outline-secondary me-2 ms-2" data-bs-dismiss="offcanvas" aria-label="Close">
                         <h5>

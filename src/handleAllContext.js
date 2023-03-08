@@ -337,6 +337,19 @@ function HandleAllProvider({children}){
             setProductAddProduct('')
             setPriceAddProduct('')
         }
+    }
+
+    const handleCheckOut=()=>{
+        if(!cart.length){
+            alert('You can chose product')
+            return
+        }
+        else if(!acount.length){
+            alert('You can Login')
+            return
+        }
+        else
+            navigate('/checkout')
         
     }
 
@@ -356,6 +369,7 @@ function HandleAllProvider({children}){
         handleLogin,handleRegister,handleLogout,
         handleOrderProduct,
         handleAddProduct,
+        handleCheckOut
         
     }
 
