@@ -75,7 +75,6 @@ function HandleAllProvider({children}){
             setListProduct(res.data)
         })
         .catch(error => console.log(error));
-
         handleLoader();
     },[])
 
@@ -259,7 +258,6 @@ function HandleAllProvider({children}){
             alert('Can nhap day du thong tin')
     }
 
-
     const handleRegister=()=>{
         if(userRegister && passwordRegister && addressRegister && phoneRegister && emailRegister){
             axios.post(`https://shoppingbe.onrender.com/register`,{
@@ -271,7 +269,6 @@ function HandleAllProvider({children}){
                 role:'user'
             })
             .then(res=>{
-                handleLoader();
             })
             .catch(error => console.log(error))
         }
@@ -307,7 +304,6 @@ function HandleAllProvider({children}){
                 navigate('/')
                 setCart([])
                 setShow(false)
-                handleLoader();
             })
             .catch()
         })
@@ -316,20 +312,32 @@ function HandleAllProvider({children}){
         alert('Chuc mung ban da dat hang thanh cong, dich vu van chuyen hang den ban trong vong 24h')
     }
 
-    const handleAddProduct=()=>{
+    const handleAddProduct= ()=>{
+        
+        console.log(imgAddProduct)
+        console.log(priceAddProduct)
+        console.log(productAddProduct)
         const token=getCookie('token')
-        axios.post('https://shoppingbe.onrender.com/product/create',
-        {
-            img:imgAddProduct,name:productAddProduct,price:priceAddProduct
-        },
-        { headers: {"Authorization" : token} }
-        ).then((res)=>{
+        if(token&&imgAddProduct&&priceAddProduct&&productAddProduct){
+            axios.post('https://shoppingbe.onrender.com/product/create',
+                {
+                    name:productAddProduct,
+                    price:priceAddProduct,
+                    img:imgAddProduct,
+                },
+                { headers: {"Authorization" : token} }
+            )
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch()
+            
+            handleLoader();
             setImgAddProduct('')
             setProductAddProduct('')
             setPriceAddProduct('')
-            alert('them san pham thanh cong')
-        })
-        .catch()
+        }
+        
     }
 
 

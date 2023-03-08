@@ -270,6 +270,48 @@ function Admin() {
                 </div>
             </div>
 
+            <div className="modal fade" id="CreateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="staticBackdropLabel">Watch Detail Bill</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <div className="row mt-2">
+                                <div className="col-4">
+                                    <span>Image</span>
+                                </div>
+                                <div className="col-8">
+                                    <input type="text" className="form-control" value={context.imgAddProduct} onChange={e=>context.setImgAddProduct(e.target.value)}/>
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col-4">
+                                    <span>Product</span>
+                                </div>
+                                <div className="col-8">
+                                    <input type="text" className="form-control" value={context.productAddProduct} onChange={e=>context.setProductAddProduct(e.target.value)}/>
+                                </div>
+                            </div>
+                            <div className="row mt-2">
+                                <div className="col-4">
+                                    <span>Price</span>
+                                </div>
+                                <div className="col-8">
+                                    <input type="number" className="form-control" value={context.priceAddProduct} onChange={e=>context.setPriceAddProduct(e.target.value)}/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={()=>context.handleAddProduct()}>Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <Footer/>
 
         </div>
