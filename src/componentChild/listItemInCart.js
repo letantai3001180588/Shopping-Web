@@ -12,33 +12,6 @@ function ListItem() {
                 {context.cart.map((item,i)=>{
                     return(
                         <div className="card m-1" key={i}>
-                            {/* <div className="card-body">
-                                <div className="d-flex justify-content-between">
-                                <div className="d-flex flex-row align-items-center">
-                                    <div>
-                                    <img
-                                        src={item.data.img}
-                                        className=" rounded-3" alt="Shopping item" style={{width: 65+"px"}}/>
-                                    </div>
-                                    <div className="ms-1">
-                                    <h6>{item.data.nameShoe}</h6>
-                                    <p className="small mb-0">Color:white, Size:38</p>
-                                    </div>
-                                </div>
-                                <div className="d-flex flex-row align-items-center">
-                                    <input className="text-center" type={"number"} 
-                                        min={1} value={item.amount} style={{width:60+'px'}}
-                                        onChange={e=>context.handleChangeAmount(item.data.id,e.target.value)} />
-                                    <div style={{width: 80+"px"}}>
-                                    <h5 className="mb-0 ms-3">${item.data.price*item.amount}</h5>
-                                    </div>
-                                    <a  style={{color: "#cecece"}} onClick={()=>context.handleDeleteItem(item.data.id)}>
-                                        <i className="bi bi-trash3"></i>
-                                    </a>
-                                </div>
-                                </div>
-                            </div> */}
-                            
                             <div className="d-flex align-items-center m-1">
                                 <div className="flex-shrink-0">
                                     <img src={item.data.img} className="img-fluid" style={{width:90+"px"}} alt="Generic placeholder image"/>

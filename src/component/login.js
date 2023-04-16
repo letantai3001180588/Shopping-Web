@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
 import Header from "../componentChild/header";
+import Footer from "../componentChild/footer";
 
 function Login() {
     const context=useContext(HandleAllContext)
@@ -32,6 +33,7 @@ function Login() {
                     </button>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }
