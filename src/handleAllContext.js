@@ -88,7 +88,7 @@ function HandleAllProvider({children}){
         const token=getCookie('token')
         const role=getCookie('role')
         if(token&&role==='user'){
-            axios.get(`http://localhost:3000/home`,
+            axios.get(`https://shoppingbe.onrender.com/home`,
                 { headers: {"Authorization" : token} }
             )
             .then(res=>{
@@ -100,7 +100,7 @@ function HandleAllProvider({children}){
                     setPhoneAcount(res.data.acount[0].phone)
                     setAddressAcount(res.data.acount[0].address)
 
-                    setAvatarUser(`http://localhost:3000/img/`+res.data.acount[0].avatar)
+                    setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
                     setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                     setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
 
@@ -116,7 +116,7 @@ function HandleAllProvider({children}){
             })
         }
         if(token&&role==='admin'){
-            axios.get(`http://localhost:3000/admin`,
+            axios.get(`https://shoppingbe.onrender.com/admin`,
                 { headers: {"Authorization" : token} }
             )
             .then(res=>{
@@ -128,7 +128,7 @@ function HandleAllProvider({children}){
                 setPhoneAcount(res.data.acount[0].phone)
                 setAddressAcount(res.data.acount[0].address)
 
-                setAvatarUser(`http://localhost:3000/img/`+res.data.acount[0].avatar)
+                setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
                 setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                 setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
 
@@ -151,21 +151,21 @@ function HandleAllProvider({children}){
     const [productOrder,setProductOrder]=useState([])
 
     const handleGetBillOrder=(id)=>{
-        axios.get(`http://localhost:3000/bill/`+id)
+        axios.get(`https://shoppingbe.onrender.com/bill/`+id)
         .then(res=>{
             setBillOrder(res.data)
         })
     }
 
     const handleGetProductOrder=()=>{
-        axios.get(`http://localhost:3000/detailBill/`)
+        axios.get(`https://shoppingbe.onrender.com/detailBill/`)
         .then(res=>{
             setProductOrder(res.data)
         })
     }
         
     const handleGetProduct=()=>{
-        axios.get(`http://localhost:3000/product/`+page)
+        axios.get(`https://shoppingbe.onrender.com/product/`+page)
         .then(res => {
             setListProduct(res.data)
         })
@@ -214,7 +214,7 @@ function HandleAllProvider({children}){
     };
 
     const handleSearchProduct=()=>{
-        axios.get('http://localhost:3000/search/'+searchProduct)
+        axios.get('https://shoppingbe.onrender.com/search/'+searchProduct)
         .then((res)=>{
             setListProduct(res.data)
             setSearchProduct('')
@@ -269,7 +269,7 @@ function HandleAllProvider({children}){
     
     const handleDelete=(data,i)=>{
         const token=getCookie('token')
-        axios.delete('http://localhost:3000/'+typeTable+'/delete/'+idDelete,
+        axios.delete('https://shoppingbe.onrender.com/'+typeTable+'/delete/'+idDelete,
         { headers: {"Authorization" : token} })
         .then((res)=>{
             handleLoader();
@@ -315,7 +315,7 @@ function HandleAllProvider({children}){
 
     const handleUpdate=(value,id)=>{
         const token=getCookie('token')
-        axios.put('http://localhost:3000/'+typeTable+'/update/'+idUpdate,itemUpdate,
+        axios.put('https://shoppingbe.onrender.com/'+typeTable+'/update/'+idUpdate,itemUpdate,
         { headers: {"Authorization" : token} })
         .then((res)=>{
             handleLoader();
@@ -323,7 +323,7 @@ function HandleAllProvider({children}){
     }
 
     const handleLogin=()=>{
-        const URL_login=`http://localhost:3000/login`
+        const URL_login=`https://shoppingbe.onrender.com/login`
         const acount={
             user:user,
             password:password
@@ -338,7 +338,7 @@ function HandleAllProvider({children}){
                     setCookie('role',Object(res.data.role),15)
                     const token=getCookie('token')
                     if(res.data.role==='user'){
-                        axios.get(`http://localhost:3000/home`,
+                        axios.get(`https://shoppingbe.onrender.com/home`,
                             { headers: {"Authorization" : token} }
                         )
                         .then(res=>{
@@ -349,7 +349,7 @@ function HandleAllProvider({children}){
                             setPhoneAcount(res.data.acount[0].phone)
                             setAddressAcount(res.data.acount[0].address)
 
-                            setAvatarUser(`http://localhost:3000/img/`+res.data.acount[0].avatar)
+                            setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
                             setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                             setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
 
@@ -367,7 +367,7 @@ function HandleAllProvider({children}){
                         .catch(error => console.log(error))
                     }
                     else if(res.data.role==='admin'){
-                        axios.get(`http://localhost:3000/admin`,
+                        axios.get(`https://shoppingbe.onrender.com/admin`,
                             { headers: {"Authorization" : token} }
                         )
                         .then(res=>{
@@ -378,7 +378,7 @@ function HandleAllProvider({children}){
                             setPhoneAcount(res.data.acount[0].phone)
                             setAddressAcount(res.data.acount[0].address)
                             
-                            setAvatarUser(`http://localhost:3000/img/`+res.data.acount[0].avatar)
+                            setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
                             setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                             setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
                             
@@ -405,7 +405,7 @@ function HandleAllProvider({children}){
 
     const handleRegister=()=>{
         if(userRegister && passwordRegister && addressRegister && phoneRegister && emailRegister){
-            axios.post(`http://localhost:3000/register`,{
+            axios.post(`https://shoppingbe.onrender.com/register`,{
                 user:userRegister,
                 password:passwordRegister,
                 address:addressRegister,
@@ -445,7 +445,7 @@ function HandleAllProvider({children}){
         }
         
         console.log(emailAcount)
-        axios.post('http://localhost:3000/bill/create', 
+        axios.post('https://shoppingbe.onrender.com/bill/create', 
             data,
             { headers: {"Authorization" : token} },
         )
@@ -456,7 +456,7 @@ function HandleAllProvider({children}){
             })
             setIdBill(res.data._id);
             if(res.data){
-                axios.post('http://localhost:3000/detailBill/create',
+                axios.post('https://shoppingbe.onrender.com/detailBill/create',
                     dataDetailBill,
                     { headers: {"Authorization" : token} },
                 ).then((respon)=>{
@@ -481,7 +481,7 @@ function HandleAllProvider({children}){
         // console.log(productAddProduct)
         const token=getCookie('token')
         if(token&&imgAddProduct&&priceAddProduct&&productAddProduct&&trademarkAddProduct){
-            axios.post('http://localhost:3000/product/create',
+            axios.post('https://shoppingbe.onrender.com/product/create',
                 {
                     name:productAddProduct,
                     price:priceAddProduct,
@@ -528,7 +528,7 @@ function HandleAllProvider({children}){
     const handleTransport=(id)=>{
         const token=getCookie('token')
         // console.log(id)
-        axios.put('http://localhost:3000/bill/transport/'+id,{},
+        axios.put('https://shoppingbe.onrender.com/bill/transport/'+id,{},
         { headers: {"Authorization" : token} })
         .then((res)=>{
             console.log(res)
@@ -538,7 +538,7 @@ function HandleAllProvider({children}){
 
     const handleReceiveOrder=(id)=>{
         const token=getCookie('token')
-        axios.put('http://localhost:3000/acount/receive/'+id,{},
+        axios.put('https://shoppingbe.onrender.com/acount/receive/'+id,{},
             { headers: {"Authorization" : token} }
         )
         .then((res)=>{
@@ -567,7 +567,7 @@ function HandleAllProvider({children}){
     }
 
     const handleFilterProduct=()=>{
-        axios.get('http://localhost:3000/filterProduct/'+trademarkFilter+'/'+designFilter+'/'+priceFilter)
+        axios.get('https://shoppingbe.onrender.com/filterProduct/'+trademarkFilter+'/'+designFilter+'/'+priceFilter)
         .then((res)=>{
             console.log(res.data)
             setListProduct(res.data)
@@ -602,13 +602,13 @@ function HandleAllProvider({children}){
         myfile.append("myfile", nameAvatarUsersInAdminPage);
         
         if(avatarUsersInAdminPage){
-            axios.post('http://localhost:3000/img/update',myfile,{})
+            axios.post('https://shoppingbe.onrender.com/img/update',myfile,{})
             .then((res)=>{
                 console.log(res.data)
-                axios.get('http://localhost:3000/delete/img/'+avatarUsersInAdminPage)
+                axios.get('https://shoppingbe.onrender.com/delete/img/'+avatarUsersInAdminPage)
                 .then(res=>{
                     console.log('delete img'+res.data)
-                    axios.put('http://localhost:3000/acount/update/'+idAvatarUsersInAdminPage,
+                    axios.put('https://shoppingbe.onrender.com/acount/update/'+idAvatarUsersInAdminPage,
                         {avatar:nameAvatarUsersInAdminPage.name},
                         { headers: {"Authorization" : token} })
                     .then(res=>{
@@ -634,7 +634,7 @@ function HandleAllProvider({children}){
     const handleUpdateProfile=()=>{
         const token=getCookie('token')
         if(acountProfile&&idAvatarUsersInAdminPage){
-            axios.put('http://localhost:3000/acount/update/'+idAvatarUsersInAdminPage,
+            axios.put('https://shoppingbe.onrender.com/acount/update/'+idAvatarUsersInAdminPage,
             acountProfile,
             { headers: {"Authorization" : token} })
             .then(res=>{

@@ -21,7 +21,7 @@ export default function Profile(){
                                         <i className="bi bi-camera"></i>
                                     </label>
                                 </div>
-                                <form action="http://localhost:3000/img/update" encType="multipart/form-data" method="post" onSubmit={(e)=>context.handleUpdateAvatarUser(e)}>
+                                <form action="https://shoppingbe.onrender.com/img/update" encType="multipart/form-data" method="post" onSubmit={(e)=>context.handleUpdateAvatarUser(e)}>
                                     <input type="file" id="a" className="btn btn-outline-primary"  style={{display:'none'}} onChange={(e)=>context.handleOnchangeAvatarUser(e)} />
                                     {context.newAvatarUsersInAdminPage&&
                                         <>
