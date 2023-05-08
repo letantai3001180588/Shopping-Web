@@ -4,9 +4,9 @@ import ListItem from "./listItemInCart";
 import { HandleAllContext } from "../handleAllContext";
 import { useContext } from "react";
 
-function Cart({cart,handleTotal}) {
-    
+function Cart({cart,handleTotal}) {    
     const context=useContext(HandleAllContext)
+
     return (
         <>
             <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style={{width:450+'px'}}>

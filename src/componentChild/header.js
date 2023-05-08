@@ -10,17 +10,21 @@ function Header() {
     return (
         <div className="d-flex">
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                <a className="navbar-brand fw-bold ms-3 text-sm-center" style={{fontSize:25+'px'}} onClick={()=>context.handleGetProduct()}>
+                <button className="btn navbar-toggler ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <a className="navbar-brand fw-bold ms-3 ms-sm text-sm-center" style={{fontSize:25+'px'}} onClick={()=>context.handleGetProduct()}>
                     <img className="me-1" src="https://www.pngall.com/wp-content/uploads/2/White-Sneakers-PNG-Clipart.png"  style={{width:50,height:50,marginTop:-10}}/>
                     <span onClick={()=>navigate('/')}>
                         ShoeStore
                     </span>
                 </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <button className="btn navbar-toggler me-1" style={{fontSize:25}} type="button" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <i className="bi bi-search"></i>
                 </button>
 
-                <div style={{width:250,marginRight:5+'rem'}}>
+                <div className="collapse navbar-collapse  mx-auto" style={{width:250,marginRight:5+'rem'}} id="collapseExample">
                     <input className="form-control me-2" type="search" placeholder="Tim kiem san pham ..." aria-label="Search" 
                         value={context.searchProduct}
                         onChange={(e)=>context.setSearchProduct(e.target.value)}
@@ -28,7 +32,7 @@ function Header() {
                     {/* <button className="btn btn-primary" onClick={(e)=>context.handleSearchProduct()}>Search</button> */}
                 </div>
 
-                <div className="collapse navbar-collapse me-5" id="navbarNavAltMarkup">
+                <div className="collapse navbar-collapse me-5 ms-2" id="navbarNavAltMarkup">
                     <div className="navbar-nav ms-auto">
                         <div className="navbar-nav me-5">
                             {context.showAdmin
