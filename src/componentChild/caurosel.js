@@ -10,13 +10,13 @@ function Caurosel() {
                     </div>
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src="https://intphcm.com/data/upload/poster-quang-cao-giay.jpg" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block" alt="..."/>
+                            <img src="https://intphcm.com/data/upload/poster-quang-cao-giay.jpg" style={{width:100+'%',height:450+'px',borderRadius:10+'px'}} className="d-block" alt="..."/>
                         </div>
                         <div className="carousel-item">
-                            <img src="https://lambanner.com/wp-content/uploads/2022/10/MNT-DESIGN-BANNER-GIAY-11.jpg" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
+                            <img src="https://lambanner.com/wp-content/uploads/2022/10/MNT-DESIGN-BANNER-GIAY-11.jpg" style={{width:100+'%',height:450+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
                         </div>
                         <div className="carousel-item">
-                            <img src="https://media.licdn.com/dms/image/C5112AQEaaI6z3NxGLQ/article-inline_image-shrink_1000_1488/0/1520238935596?e=1683158400&v=beta&t=5vpHLw3shBZG_fw_0nRnqwvGqIdC5Um4JWoPlnUOdIk" style={{width:100+'%',height:400+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
+                            <img src="https://as1.ftcdn.net/v2/jpg/02/07/92/80/1000_F_207928043_CfS9KgW2M7O1mKdKBNOvpPOaES7HTytV.jpg" style={{width:100+'%',height:450+'px',borderRadius:10+'px'}} className="d-block w-100" alt="..."/>
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">

@@ -259,7 +259,8 @@ function HandleAllProvider({children}){
     }
 
     const handleTotal=()=>{
-        return cart.reduce((sum,item)=>sum+item.data.trademark*item.amount,0)
+        return cart.reduce((sum,item)=>sum+item.data.price*item.amount,0)
+        console.log(cart)
     }
 
     const handleItemDelete=(data,i)=>{
@@ -332,7 +333,9 @@ function HandleAllProvider({children}){
             axios.post(URL_login,acount)
             .then(res => {
                 if(res.data==='Failure')
-                    alert('dang nhap that bai')
+                    toast.error("Tài khoản và mật khẩu không chính xác!.", {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                 else{
                     setCookie('token',Object(res.data.accessToken),15)
                     setCookie('role',Object(res.data.role),15)
@@ -399,8 +402,11 @@ function HandleAllProvider({children}){
             })
             .catch(error => console.log(error));
         }
-        else
-            alert('Can nhap day du thong tin');
+        else{
+            toast.error("Bạn cần nhập đầy đủ tài khoản và mật khẩu.", {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
     }
 
     const handleRegister=()=>{
@@ -416,11 +422,13 @@ function HandleAllProvider({children}){
             .then(res=>{
             })
             .catch(error => console.log(error))
+            navigate('/login')
         }
         else{
-            alert('Ban can nhap thong tin day du')
+            toast.error("Bạn cần nhập thông tin đầy đủ!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }
-        navigate('/login')
     }
 
     const handleLogout=()=>{

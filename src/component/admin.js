@@ -122,7 +122,7 @@ function Admin() {
                                     return(
                                         <tr key={i} className='align-middle justify-content-center text-center'>
                                             <th>
-                                                <img className="rounded-circle" src={"https://shoppingbe.onrender.com/img/"+item.avatar} width={50} height={50} alt={item._id} />
+                                                <img className="rounded-circle" src={"http://localhost:3000/img/"+item.avatar} width={50} height={50} alt={item._id} />
                                             </th>
                                             <td style={{width:50}}>
                                                 <div className="text-center text-info" data-bs-toggle="modal"  data-bs-target="#AvatarModal" onClick={()=>context.handleAvatarUpdate(item,item._id)}>
@@ -501,7 +501,7 @@ function Admin() {
                             <div className="modal-body">
                                 <div className="row m-2">
                                     <div className="col-5 d-flex justify-content-center">
-                                        <img className="rounded-circle" width={120} height={120} src={context.avatarUsersInAdminPage?('https://shoppingbe.onrender.com/img/'+context.avatarUsersInAdminPage):'https://img6.thuthuatphanmem.vn/uploads/2022/02/11/anh-con-gai-buon-de-thuong_050949344.jpg'}/>
+                                        <img className="rounded-circle" width={120} height={120} src={context.avatarUsersInAdminPage?('http://localhost:3000/img/'+context.avatarUsersInAdminPage):'https://img6.thuthuatphanmem.vn/uploads/2022/02/11/anh-con-gai-buon-de-thuong_050949344.jpg'}/>
                                     </div>
                                     <div className="col-2 d-flex justify-content-center align-items-center">
                                         <span style={{fontSize:30}}>
@@ -525,7 +525,7 @@ function Admin() {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>context.setNewAvatarUsersInAdminPage('')}>Hủy</button>
-                                <form action="https://shoppingbe.onrender.com/img/update" encType="multipart/form-data" method="post" onSubmit={(e)=>context.handleUpdateAvatarUser(e)}>
+                                <form action="http://localhost:3000/img/update" encType="multipart/form-data" method="post" onSubmit={(e)=>context.handleUpdateAvatarUser(e)}>
                                     <input type="file"  name="myfile" id="avatar" style={{display:'none'}} onChange={(e)=>context.handleOnchangeAvatarUser(e)}/>
                                     <input type="submit" value={'Lưu'} className="btn btn-success" data-bs-dismiss="modal"  onClick={()=>context.setNewAvatarUsersInAdminPage('')} />
                                 </form>

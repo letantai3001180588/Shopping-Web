@@ -11,7 +11,7 @@ function Header() {
         <div className="d-flex">
             <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
                 <a className="navbar-brand fw-bold ms-3 text-sm-center" style={{fontSize:25+'px'}} onClick={()=>context.handleGetProduct()}>
-                    <img className="me-1" src="https://image.pngaaa.com/664/5820664-middle.png"  style={{width:80,height:40,marginTop:-10}}/>
+                    <img className="me-1" src="https://www.pngall.com/wp-content/uploads/2/White-Sneakers-PNG-Clipart.png"  style={{width:50,height:50,marginTop:-10}}/>
                     <span onClick={()=>navigate('/')}>
                         ShoeStore
                     </span>
@@ -119,10 +119,10 @@ function Header() {
                         </div>
                         :<>
                             <button className="btn btn-secondary" onClick={()=>context.navigate('/login')}>
-                                Login
+                                Đăng nhập
                             </button>
                             <button className="btn btn-outline-secondary text-dark ms-1" onClick={()=>context.navigate('/register')}>
-                                Register
+                                Đăng kí
                             </button>
                         </>
                         }
