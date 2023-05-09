@@ -3,7 +3,7 @@ import Payment from "../componentChild/payment";
 
 function Checkout() {
     return (
-        <div className="container mt-5">
+        <div className="container" style={{marginTop:150}}>
             <div className="row">
                 <CartPay/>
                 <Payment/>

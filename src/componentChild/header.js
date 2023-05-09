@@ -25,7 +25,7 @@ function Header() {
                 </button>
 
                 <div className="collapse navbar-collapse  mx-auto" style={{width:250,marginRight:5+'rem'}} id="collapseExample">
-                    <input className="form-control me-2" type="search" placeholder="Tim kiem san pham ..." aria-label="Search" 
+                    <input className="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm ..." aria-label="Search" 
                         value={context.searchProduct}
                         onChange={(e)=>context.setSearchProduct(e.target.value)}
                         onKeyDown={e=>context.handleSearchProductKeyDown(e)}/>

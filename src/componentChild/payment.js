@@ -10,7 +10,7 @@ function Payment() {
                 <div className="card rounded-3">
                     <div className="card-body">
                         <div className="mb-4">
-                            <div className="mb-0 text-center fs-2">Payment</div>
+                            <div className="mb-0 text-center fs-2">Thanh toán</div>
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="basic-addon1">Email:</span>
@@ -18,31 +18,31 @@ function Payment() {
                         </div>
 
                         <p className="small mb-2">
-                            Card type: 
-                            <span>visa, paypal</span>
+                            Loại card: 
+                            <span> visa, paypal</span>
                         </p>
 
                         <div className="mb-3">
-                            <label htmlFor="exampleInputEmail1" className="form-label">Adress</label>
-                            <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Country..." aria-describedby="emailHelp"/>
+                            <label htmlFor="exampleInputEmail1" className="form-label">Địa chỉ</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Địa chỉ" aria-describedby="emailHelp"/>
                         </div>
 
                         <form className="mt-4">
                             <div className="form-outline form-white mb-4">
-                                <label className="form-label" htmlFor="typeName">Cardholder's Name</label>
+                                <label className="form-label" htmlFor="typeName">Ngân hàng</label>
                                 <input type="text" id="typeName" className="form-control" siez="17"
-                                    placeholder="Cardholder's Name" />
+                                    placeholder="Ngân hàng" />
                             </div>
 
                             <div className="form-outline form-white mb-4">
-                                <label className="form-label" htmlFor="typeText">Card Number</label>
+                                <label className="form-label" htmlFor="typeText">Số thẻ:</label>
                                 <input type="text" id="typeText" className="form-control" siez="17"
                                     placeholder="1234 5678 9012 3457" minLength={19} maxLength={19} />
                             </div>
 
                             <div className="row mb-4">
                             <div className="col-md-6">
-                                <label className="form-label" htmlFor="typeExp">Expiration</label>
+                                <label className="form-label" htmlFor="typeExp">Thời hạn</label>
                                 <div className="form-outline form-white">
                                     <input type="text" id="typeExp" className="form-control" placeholder="MM/YYYY" size="7" minLength={7} maxLength={7} />
                                 </div>
@@ -62,12 +62,14 @@ function Payment() {
 
                         <div className="mb-3 form-check">
                             <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                            <label className="form-check-label" htmlFor="exampleCheck1">Billing address same as shipping</label>
+                            <label className="form-check-label" htmlFor="exampleCheck1">
+                                Địa chỉ thanh toán giống như vận chuyển
+                            </label>
                         </div>
 
                         <div className="col-12 d-grid mb-1">
                             <button type="button" className="btn btn-primary btn-block btn-lg" onClick={()=>context.handleOrderProduct()}>
-                                <span>Checkout</span>
+                                <span>Thanh toán</span>
                             </button>
                         </div>
 
