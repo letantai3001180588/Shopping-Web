@@ -25,8 +25,8 @@ export default function Profile(){
                                     <input type="file" id="a" className="btn btn-outline-primary"  style={{display:'none'}} onChange={(e)=>context.handleOnchangeAvatarUser(e)} />
                                     {context.newAvatarUsersInAdminPage&&
                                         <>
-                                            <button type="submit" className="btn btn-outline-success ms-3 rounded-circle"  >
-                                                <i className="bi bi-check-lg"></i>
+                                            <button type="submit" className="btn btn-outline-success ms-3 rounded-circle"  onClick={(e)=>context.handleUpdateAvatarUser(e)}>
+                                                <i className="bi bi-check-lg"></i> 
                                             </button>
                                             <button className="btn btn-outline-secondary ms-3 rounded-circle" onClick={()=>context.setNewAvatarUsersInAdminPage('')}>
                                                 <i className="bi bi-x-circle"></i>
@@ -55,19 +55,17 @@ export default function Profile(){
                             </div>
                             <div className="col-md-12 mt-3">
                                 <label className="form-label">Email: </label>
-                                <input type="email" className="form-control" name="email" placeholder="Email" value={context.acountProfile.email}  readOnly={context.showInputProfile} />
+                                <input type="email" className="form-control" name="email" placeholder="Email" value={context.acountProfile.email}  readOnly={context.showInputProfile} onChange={e=>context.handleInputChangeUpdate(e)}/>
                             </div>
                             <div className="col-md-12 mt-3">
                                 <label className="form-label">Số điện thoại: </label>
-                                <input type="number" className="form-control" name="phone" placeholder="Số điện thoại" value={context.acountProfile.phone} readOnly={context.showInputProfile} />
+                                <input type="number" className="form-control" name="phone" placeholder="Số điện thoại" value={context.acountProfile.phone} readOnly={context.showInputProfile} onChange={e=>context.handleInputChangeUpdate(e)}/>
                             </div>
                             <div className="col-md-12 mt-3">
                                 <label className="form-label">Địa chỉ:</label>
-                                <input type="text" className="form-control" name="address" placeholder="Địa chỉ"  value={context.acountProfile.address} readOnly={context.showInputProfile} />
+                                <input type="text" className="form-control" name="address" placeholder="Địa chỉ"  value={context.acountProfile.address} readOnly={context.showInputProfile} onChange={e=>context.handleInputChangeUpdate(e)}/>
                             </div>
                         </div>
-
-                        
 
                         <div className="mt-5">
                             <button className="btn btn-primary profile-button" type="button" onClick={()=>context.handleUpdateProfile()}>Lưu hồ sơ</button>

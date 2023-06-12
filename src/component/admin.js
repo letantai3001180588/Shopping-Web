@@ -122,7 +122,7 @@ function Admin() {
                                     return(
                                         <tr key={i} className='align-middle justify-content-center text-center'>
                                             <th>
-                                                <img className="rounded-circle" src={"https://shoppingbe.onrender.com/img/"+item.avatar} width={50} height={50} alt={item._id} />
+                                                <img className="rounded-circle" src={item.avatar?"https://shoppingbe.onrender.com/img/"+item.avatar:"https://shoppingbe.onrender.com/img/h0.jpg"} width={50} height={50} alt={item._id} />
                                             </th>
                                             <td style={{width:50}}>
                                                 <div className="text-center text-info" data-bs-toggle="modal"  data-bs-target="#AvatarModal" onClick={()=>context.handleAvatarUpdate(item,item._id)}>

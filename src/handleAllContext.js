@@ -84,9 +84,15 @@ function HandleAllProvider({children}){
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     
+    const [sumPage,setSumPage]=useState()
+
     const handleLoader=()=>{
         const token=getCookie('token')
         const role=getCookie('role')
+        axios.get(`https://shoppingbe.onrender.com/sumPage`)
+        .then(res=>{
+            setSumPage(Number(res.data))
+        })
         if(token&&role==='user'){
             axios.get(`https://shoppingbe.onrender.com/home`,
                 { headers: {"Authorization" : token} }
@@ -100,7 +106,12 @@ function HandleAllProvider({children}){
                     setPhoneAcount(res.data.acount[0].phone)
                     setAddressAcount(res.data.acount[0].address)
 
-                    setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                    if(res.data.acount[0].avatar !=''){
+                        setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                    }
+                    else{
+                        setAvatarUser(`https://shoppingbe.onrender.com/img/h0.jpg`)
+                    }
                     setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                     setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
 
@@ -326,7 +337,7 @@ function HandleAllProvider({children}){
     const handleLogin=()=>{
         const URL_login=`https://shoppingbe.onrender.com/login`
         const acount={
-            user:user,
+            email:user,
             password:password
         }
         if(user&&password){
@@ -337,6 +348,7 @@ function HandleAllProvider({children}){
                         position: toast.POSITION.TOP_RIGHT
                     });
                 else{
+                    console.log(res.data)
                     setCookie('token',Object(res.data.accessToken),15)
                     setCookie('role',Object(res.data.role),15)
                     const token=getCookie('token')
@@ -345,6 +357,7 @@ function HandleAllProvider({children}){
                             { headers: {"Authorization" : token} }
                         )
                         .then(res=>{
+                            console.log(res.data)
                             setAcountProfile({username:res.data.acount[0].username,email:res.data.acount[0].email,phone:res.data.acount[0].phone,address:res.data.acount[0].address})
                             setAcount(res.data.acount[0].username)
                             setIdAcount(res.data.acount[0]._id)
@@ -352,7 +365,12 @@ function HandleAllProvider({children}){
                             setPhoneAcount(res.data.acount[0].phone)
                             setAddressAcount(res.data.acount[0].address)
 
-                            setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                            if(res.data.acount[0].avatar !=''){
+                                setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                            }
+                            else{
+                                setAvatarUser(`https://shoppingbe.onrender.com/img/h0.jpg`)
+                            }
                             setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                             setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
 
@@ -370,6 +388,7 @@ function HandleAllProvider({children}){
                         .catch(error => console.log(error))
                     }
                     else if(res.data.role==='admin'){
+                        console.log('admin day ne')
                         axios.get(`https://shoppingbe.onrender.com/admin`,
                             { headers: {"Authorization" : token} }
                         )
@@ -381,7 +400,12 @@ function HandleAllProvider({children}){
                             setPhoneAcount(res.data.acount[0].phone)
                             setAddressAcount(res.data.acount[0].address)
                             
-                            setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                            if(res.data.acount[0].avatar !=''){
+                                setAvatarUser(`https://shoppingbe.onrender.com/img/`+res.data.acount[0].avatar)
+                            }
+                            else{
+                                setAvatarUser(`https://shoppingbe.onrender.com/img/h0.jpg`)
+                            }
                             setAvatarUsersInAdminPage(res.data.acount[0].avatar)
                             setIdAvatarUsersInAdminPage(res.data.acount[0]._id)
                             
@@ -412,17 +436,21 @@ function HandleAllProvider({children}){
     const handleRegister=()=>{
         if(userRegister && passwordRegister && addressRegister && phoneRegister && emailRegister){
             axios.post(`https://shoppingbe.onrender.com/register`,{
-                user:userRegister,
+                username:userRegister,
                 password:passwordRegister,
                 address:addressRegister,
                 phone:phoneRegister,
                 email:emailRegister,
-                role:'user'
+                role:'user',
+                avatar:''
             })
             .then(res=>{
             })
             .catch(error => console.log(error))
             navigate('/login')
+            toast.success("Đăng kí thành công !", {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }
         else{
             toast.error("Bạn cần nhập thông tin đầy đủ!", {
@@ -468,13 +496,14 @@ function HandleAllProvider({children}){
                     dataDetailBill,
                     { headers: {"Authorization" : token} },
                 ).then((respon)=>{
-                    navigate('/')
-                    setCart([])
-                    setShow(false)
+                    console.log(respon.data)
                 })
                 .catch()
             }
         })
+        navigate('/')
+        setCart([])
+        setShow(false)
         
         toast.success("Chúc mừng bạn đẫ đặt hàng thành công, dịch vụ vận sẽ chuyển hàng đến bạn trong vòng 24h !", {
             position: toast.POSITION.TOP_RIGHT
@@ -546,7 +575,7 @@ function HandleAllProvider({children}){
 
     const handleReceiveOrder=(id)=>{
         const token=getCookie('token')
-        axios.put('https://shoppingbe.onrender.com/acount/receive/'+id,{},
+        axios.put('https://shoppingbe.onrender.com/bill/receive/'+id,{},
             { headers: {"Authorization" : token} }
         )
         .then((res)=>{
@@ -608,25 +637,34 @@ function HandleAllProvider({children}){
         const myfile = new FormData();
         const token=getCookie('token')
         myfile.append("myfile", nameAvatarUsersInAdminPage);
-        
-        if(avatarUsersInAdminPage){
             axios.post('https://shoppingbe.onrender.com/img/update',myfile,{})
             .then((res)=>{
                 console.log(res.data)
-                axios.get('https://shoppingbe.onrender.com/delete/img/'+avatarUsersInAdminPage)
-                .then(res=>{
-                    console.log('delete img'+res.data)
+                if(avatarUsersInAdminPage){
+                    axios.get('https://shoppingbe.onrender.com/delete/img/'+avatarUsersInAdminPage)
+                    .then(res=>{
+                        console.log('delete img'+res.data)
+                        axios.put('https://shoppingbe.onrender.com/acount/update/'+idAvatarUsersInAdminPage,
+                            {avatar:nameAvatarUsersInAdminPage.name},
+                            { headers: {"Authorization" : token} })
+                        .then(res=>{
+                            console.log('change data success'+ res.data)
+                            setNewAvatarUsersInAdminPage('')
+                            handleLoader();
+                        })
+                    })
+                }
+                else{
                     axios.put('https://shoppingbe.onrender.com/acount/update/'+idAvatarUsersInAdminPage,
                         {avatar:nameAvatarUsersInAdminPage.name},
                         { headers: {"Authorization" : token} })
-                    .then(res=>{
-                        console.log('change data success'+ res.data)
-                        setNewAvatarUsersInAdminPage('')
-                        handleLoader();
-                    })
-                })
+                        .then(res=>{
+                            console.log('change data success'+ res.data)
+                            setNewAvatarUsersInAdminPage('')
+                            handleLoader();
+                        })
+                }
             })
-        }
         
     }
 
@@ -643,12 +681,12 @@ function HandleAllProvider({children}){
         const token=getCookie('token')
         if(acountProfile&&idAvatarUsersInAdminPage){
             axios.put('https://shoppingbe.onrender.com/acount/update/'+idAvatarUsersInAdminPage,
-            acountProfile,
-            { headers: {"Authorization" : token} })
-            .then(res=>{
-                setShowInputProfile(!showInputProfile)
-                handleLoader();
-            })
+                acountProfile,
+                { headers: {"Authorization" : token} })
+                .then(res=>{
+                    setShowInputProfile(!showInputProfile)
+                    handleLoader();
+                })
         }
     }
 
@@ -686,7 +724,7 @@ function HandleAllProvider({children}){
 
 
     const value={
-        handleLoader,navigate,handleGetProduct,avatarUser,
+        handleLoader,navigate,handleGetProduct,avatarUser,sumPage,
         listProduct,cart,show,itemDelete,itemUpdate,showAdmin,
         listUsersDB,billDB,detailBillDB,listProductDB,idWatch,
         acount,emailAcount,phoneAcount,showAcount,addressAcount,
