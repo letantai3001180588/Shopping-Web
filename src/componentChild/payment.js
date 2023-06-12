@@ -69,7 +69,7 @@ function Payment() {
 
                         <div className="col-12 d-grid mb-1">
                             <button type="button" className="btn btn-primary btn-block btn-lg" onClick={()=>context.handleOrderProduct()}>
-                                <span>Thanh toán</span>
+                                <span>Đặt hàng</span>
                             </button>
                         </div>
 
