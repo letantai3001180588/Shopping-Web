@@ -1,15 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
-import Header from "../componentChild/header";
-import Footer from "../componentChild/footer";
+import Nav from "../component/Nav";
+import Footer from "../component/footer";
 import { ToastContainer } from "react-toastify";
 
 function Login() {
     const context=useContext(HandleAllContext)
     return (
         <div className="App">
-            <Header/>
+            <Nav/>
             <div className="d-flex justify-content-center" style={{width:100+'%',height:100+'%',background:'#f9fafb'}}>
                 <div className="text-start" style={{width:600+'px',height:400+'px',marginTop:200+'px',marginBottom:200+'px',borderRadius:10,background:'gainsboro',padding:30+'px'}}>
                     <h1 className="text-center mb-4">Đăng nhập</h1>

@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
-import Footer from "../componentChild/footer";
-import Header from "../componentChild/header";
-import Order from "../componentChild/order";
+import Footer from "../component/footer";
+import Nav from "../component/Nav";
+import Order from "../component/order";
 
 function Admin() {
     const context=useContext(HandleAllContext)
     if(context.showAdmin)         
     return (   
         <div className="App">
-            <Header/>
+            <Nav/>
 
             <nav className="container" style={{marginTop:150+'px',marginBottom:20+'px',position:'relative'}}>
                 <div className="nav nav-tabs bg-light" id="nav-tab" role="tablist">
@@ -67,8 +67,7 @@ function Admin() {
                                         return(
                                                 <tr key={i} className='align-middle justify-content-center'>
                                                     <td style={{width:80+'px'}}>
-                                                        {/* {item.img} */}
-                                                        <img src={item.img} style={{width:50+'px',height:50+'px',borderRadius:5}} alt={item._id}/>
+                                                        <img src={item.img} style={{width:50+'px',height:50+'px',borderRadius:5}} alt={item.name || 'Hình ảnh sản phẩm'}/>
                                                     </td>
                                                     <td>{item.name}</td>
                                                     <td className="text-center">$ {item.price}</td>
@@ -423,12 +422,13 @@ function Admin() {
                                         return(
                                         <tr key={i}>
                                             <td>
-                                                <img src={item.id_product.img} style={{width:50,height:50}}/>
+                                                <img src={item.id_product.img} style={{width:50,height:50}} alt=""/>
                                             </td>
                                             <td>{item.id_product.name}</td>
                                             <td>{item.quantity}</td>
                                         </tr>
                                     )}
+                                    return null;
                                 })}
                             </tbody>
                         </table>
@@ -501,7 +501,7 @@ function Admin() {
                             <div className="modal-body">
                                 <div className="row m-2">
                                     <div className="col-5 d-flex justify-content-center">
-                                        <img className="rounded-circle" width={120} height={120} src={context.avatarUsersInAdminPage?('https://shoppingbe.onrender.com/img/'+context.avatarUsersInAdminPage):'https://img6.thuthuatphanmem.vn/uploads/2022/02/11/anh-con-gai-buon-de-thuong_050949344.jpg'}/>
+                                        <img className="rounded-circle" alt="" width={120} height={120} src={context.avatarUsersInAdminPage?('https://shoppingbe.onrender.com/img/'+context.avatarUsersInAdminPage):'https://img6.thuthuatphanmem.vn/uploads/2022/02/11/anh-con-gai-buon-de-thuong_050949344.jpg'}/>
                                     </div>
                                     <div className="col-2 d-flex justify-content-center align-items-center">
                                         <span style={{fontSize:30}}>
@@ -509,7 +509,7 @@ function Admin() {
                                         </span>
                                     </div>
                                     <div className="col-5">
-                                        <img className="rounded-circle" width={120} height={120} src={context.newAvatarUsersInAdminPage||'https://cdn-icons-png.flaticon.com/512/6596/6596121.png'}/>
+                                        <img className="rounded-circle" alt="" width={120} height={120} src={context.newAvatarUsersInAdminPage||'https://cdn-icons-png.flaticon.com/512/6596/6596121.png'}/>
                                     </div>
                                 </div>
                                 <div className="row">

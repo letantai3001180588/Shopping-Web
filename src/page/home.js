@@ -1,21 +1,20 @@
 import { useContext} from "react";
 import React from "react";
 import { Suspense } from "react";
-import Cart from "../componentChild/cart";
-import Caurosel from "../componentChild/caurosel";
-import Footer from "../componentChild/footer";
-import Header from "../componentChild/header";
-import Chat from "../componentChild/chat";
+import Cart from "../component/cart";
+import Caurosel from "../component/caurosel";
+import Footer from "../component/footer";
+import Nav from "../component/Nav";
 import { HandleAllContext } from "../handleAllContext";
-import Commitment from "../componentChild/commitment";
+import Commitment from "../component/commitment";
 import { ToastContainer } from "react-toastify";
-import SkeletonProduct from "../componentChild/skeletonProduct";
-import SortProduct from "../componentChild/sortProduct";
-import Order from "../componentChild/order";
+import SkeletonProduct from "../component/skeletonProduct";
+import SortProduct from "../component/sortProduct";
+import Order from "../component/order";
 
 const ListProduct = React.lazy(() =>{
   return new Promise(resolve => {
-    setTimeout(() => resolve(import("../componentChild/listProduct")), 3000);
+    setTimeout(() => resolve(import("../component/listProduct")), 3000);
   });
 });
 
@@ -25,7 +24,7 @@ function Home() {
   
   return (
     <div className="App postion-relative">
-      <Header cartLenght={context.cart.length}/>
+      <Nav cartLenght={context.cart.length}/>
 
       <Caurosel/>
       <Commitment/>

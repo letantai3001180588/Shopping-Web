@@ -1,5 +1,5 @@
-import Header from "../componentChild/header";
-import Footer from "../componentChild/footer";
+import Header from "../component/Nav";
+import Footer from "../component/footer";
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
 
@@ -13,7 +13,7 @@ export default function Profile(){
             <div className="row">
                 <div className="col-md-4 border-right d-flex justify-content-center">
                     <div className="d-flex flex-column align-items-center justify-content-center text-center p-3 py-5">
-                        <img className="rounded-circle" width="150px" style={{height:150,objectFit:'cover'}}  src={context.newAvatarUsersInAdminPage||context.avatarUser}/>
+                        <img className="rounded-circle" width="150px" alt="" style={{height:150,objectFit:'cover'}}  src={context.newAvatarUsersInAdminPage||context.avatarUser}/>
                         <div className="mt-1 text-center mb-3">
                             <div className="input-group">
                                 <div className="custom-file">

@@ -3,9 +3,9 @@
 // eslint-disable-next-line no-unused-vars
 import { useContext } from "react";
 import { HandleAllContext } from "../handleAllContext";
-import Header from "../componentChild/header";
+import Header from "../component/Nav";
 import { Link } from "react-router-dom";
-import Footer from "../componentChild/footer";
+import Footer from "../component/footer";
 import { ToastContainer } from "react-toastify";
 function Register() {
     const context=useContext(HandleAllContext)

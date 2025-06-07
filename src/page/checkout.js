@@ -1,5 +1,5 @@
-import CartPay from "../componentChild/cartPay";
-import Payment from "../componentChild/payment";
+import CartPay from "../component/cartPay";
+import Payment from "../component/payment";
 
 function Checkout() {
     return (

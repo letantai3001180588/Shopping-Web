@@ -10,52 +10,8 @@ function ListProduct({listProduct,handleAddToCart}) {
         <>
             <div className="container" > 
                 <div className="row" >
-                    {/* <div className="card" style={{background:'white',borderRadius:10}}>
-                        danh muc
-                    </div> */}
-
                     <div className="col-12" style={{margin:'auto',paddingTop:50+'px',paddingBottom:50+'px',marginBottom:50+'px',background:'white',borderRadius:10+'px'}}>
-                        {/* <div className="row" style={{marginBottom:20}}>
-                            <div className="col-md-3 col-lg-3 mb-4 mb-md-0">
-                                <div className="card">
-                                    <div className="d-flex justify-content-between p-3">
-                                        <p className="lead mb-0">Today's Combo Offer</p>
-                                        <div
-                                        className="bg-info rounded-circle d-flex align-items-center justify-content-center shadow-1-strong"
-                                        style={{width: 35, height: 35}}>
-                                        <p className="text-white mb-0 small">x4</p>
-                                        </div>
-                                    </div>
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp"
-                                        className="card-img-top" alt="Laptop" />
-                                    <div className="card-body">
-                                        <div className="d-flex justify-content-between">
-                                        <p className="small"><a href="#!" className="text-muted">Laptops</a></p>
-                                        <p className="small text-danger"><s>$1099</s></p>
-                                        </div>
-
-                                        <div className="d-flex justify-content-between mb-3">
-                                        <h5 className="mb-0">HP Notebook</h5>
-                                        <h5 className="text-dark mb-0">$999</h5>
-                                        </div>
-
-                                        <div className="d-flex justify-content-between mb-2">
-                                        <p className="text-muted mb-0">Available: <span className="fw-bold">6</span></p>
-                                        <div className="ms-auto text-warning">
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                            <i className="bi bi-star-fill"></i>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-
                         <div className="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-3">
-
                             {listProduct.map((data,i) => {
                                 return(
                                 <div className="col" key={i}>
@@ -80,7 +36,7 @@ function ListProduct({listProduct,handleAddToCart}) {
                                                     <p className="card-text" style={{fontSize:19,fontWeight:500}}>${data.price}</p>
                                                 </div>
                                                 <div className="col-3" style={{float:'right'}}>
-                                                    <button className="btn btn-secondary mt-2" type="button"  style={{borderRadius:50+'%'}} onClick={()=>handleAddToCart(data)}>
+                                                    <button className="btn btn-secondary bg-secondary mt-2" type="button"  style={{borderRadius:50+'%'}} onClick={()=>handleAddToCart(data)}>
                                                         <i className="bi bi-cart-plus"></i>
                                                     </button>
                                                 </div>
@@ -89,15 +45,10 @@ function ListProduct({listProduct,handleAddToCart}) {
                                     </div>
                                 </div>
                             )})}
-                        
-                            
-                                
                         </div>
                     </div>
                 </div>
-
             </div>
-            
             
             <nav aria-label="..." className="d-flex justify-content-center">
                 <ul className="pagination">

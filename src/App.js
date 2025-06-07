@@ -1,19 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, NavLink, Routes,a } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from 'react';
-import Login from './component/login';
-import Register from './component/register';
-import Header from './componentChild/header';
-import Profile from './component/profile';
+import Login from './page/login';
+import Register from './page/register';
+import Header from './component/Nav';
+import Profile from './page/profile';
 
 const Home = lazy(() =>{
   return new Promise(resolve => {
-    setTimeout(() => resolve(import('./component/home')), 1000);
+    setTimeout(() => resolve(import('./page/home')), 1000);
   });
 });
-const Checkout = lazy(() =>import('./component/checkout'));
-const Admin = lazy(() =>import('./component/admin'));
+const Checkout = lazy(() =>import('./page/checkout'));
+const Admin = lazy(() =>import('./page/admin'));
 
 const SkeletonHome=({value})=>{
   return(
